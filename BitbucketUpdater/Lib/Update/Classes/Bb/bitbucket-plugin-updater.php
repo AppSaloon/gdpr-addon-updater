@@ -29,17 +29,17 @@ class Bitbucket_Plugin_Updater {
      *
      * Arpu_Bitbucket_Plugin_Updater constructor.
      *
-     * @param $bb_plugin
+     * @param \BitbucketUpdater\Model\Bitbucket $bitbucket
      */
-    function __construct( Bitbucket $bb_plugin ) {
-        $this->plugin_file   = $bb_plugin->plugin_file;
-        $this->plugin_slug   = $bb_plugin->plugin_slug;
-        $this->host          = $bb_plugin->bb_host;
-        $this->download_host = $bb_plugin->bb_download_host;
-        $this->username      = $bb_plugin->bb_owner;
-        $this->password      = $bb_plugin->bb_password;
-        $this->project_name  = $bb_plugin->bb_project_name;
-        $this->repo          = $bb_plugin->bb_repo_name;
+    function __construct( Bitbucket $bitbucket ) {
+        $this->plugin_file   = $bitbucket->plugin_file;
+        $this->plugin_slug   = $bitbucket->plugin_slug;
+        $this->host          = $bitbucket->bb_host;
+        $this->download_host = $bitbucket->bb_download_host;
+        $this->username      = $bitbucket->bb_owner;
+        $this->password      = $bitbucket->bb_password;
+        $this->project_name  = $bitbucket->bb_project_name;
+        $this->repo          = $bitbucket->bb_repo_name;
         $this->init_plugin_data();
 
         add_filter( "pre_set_site_transient_update_plugins", array( $this, "bb_set_transient" ) );
