@@ -28,7 +28,7 @@ This repo will be used to update wp-gdpr addon plugins.
            $edd->plugin_name = 'Plugins name';
 6. Push Edd model to the Updater class
     *      $updater->set_edd( $edd );
-7. Validate both of them and check for version update
-    *      $updater->validate();
-8. Output License key form
+7. Output License key form
     *      $updater->display_license_form();
+8. Validate all and check for version update
+    *      $updater->validate();
