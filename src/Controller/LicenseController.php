@@ -60,11 +60,11 @@ class LicenseController {
 	 */
 	public function save( $license_key ) {
 		if ( LicenseCheck::is_license_key_valid( $license_key, $this->edd ) ) {
-			$this->edd->delete_option();
-			$this->license_key = null;
-		} else {
 			$this->edd->update_option( $license_key );
 			$this->license_key = $license_key;
+		} else {
+			$this->edd->delete_option();
+			$this->license_key = null;
 		}
 	}
 }
