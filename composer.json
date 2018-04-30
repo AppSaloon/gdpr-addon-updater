@@ -1,5 +1,5 @@
 {
-  "name": "aytac/gdpr-bitbucket-updater",
+  "name": "wp-gdpr/gdpr-bitbucket-updater",
   "description": "Updates wp gdpr addon through bitbucket",
   "authors": [
     {
