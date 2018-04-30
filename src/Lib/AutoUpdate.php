@@ -2,7 +2,7 @@
 
 namespace BitbucketUpdater\Lib;
 
-use BitbucketUpdater\Lib\Update\Classes\Bb\Bitbucket_Plugin_Updater;
+use BitbucketUpdater\Lib\Update\Classes\Bb\BitbucketPluginUpdater;
 use BitbucketUpdater\Model\Bitbucket;
 use BitbucketUpdater\Model\Edd;
 
@@ -50,7 +50,7 @@ class AutoUpdate {
 	 */
 	public function handle_updates() {
 		if ( $this->git_repository_is_live() && $this->licensekey_is_valid() ) {
-			new Bitbucket_Plugin_Updater( $this->bitbucket );
+			new BitbucketPluginUpdater( $this->bitbucket );
 		}
 	}
 

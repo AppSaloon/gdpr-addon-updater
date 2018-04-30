@@ -47,7 +47,7 @@ class LicenseController {
 			$this->save( $_POST[ $this->edd->license_option ] );
 		}
 
-		include_once '../View/Admin/LicenseKeyForm.php';
+		include_once GDPR_UPDATER_DIR . 'View/Admin/LicenseKeyForm.php';
 	}
 
 	/**

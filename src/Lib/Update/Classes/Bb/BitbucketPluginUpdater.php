@@ -4,7 +4,7 @@ namespace BitbucketUpdater\Lib\Update\Classes\Bb;
 use BitbucketUpdater\Lib\Update\Classes\Parsedown\Parsedown;
 use BitbucketUpdater\Model\Bitbucket;
 
-class Bitbucket_Plugin_Updater {
+class BitbucketPluginUpdater {
 
     private $slug; // plugin slug
     private $real_slug; // plugin real slug

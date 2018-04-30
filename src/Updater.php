@@ -7,6 +7,8 @@ use BitbucketUpdater\Model\Bitbucket;
 use BitbucketUpdater\Model\Edd;
 use BitbucketUpdater\Controller\LicenseController;
 
+define('GDPR_UPDATER_DIR', trailingslashit( dirname( __FILE__ ) ));
+
 class Updater {
 
 	/**
