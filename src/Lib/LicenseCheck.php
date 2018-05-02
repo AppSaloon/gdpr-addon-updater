@@ -6,7 +6,21 @@ use BitbucketUpdater\Model\Edd;
 
 class LicenseCheck {
 
+	/**
+	 * Validate given key
+	 *
+	 * @param $license_key  string  License key
+	 * @param \BitbucketUpdater\Model\Edd $edd      object  Edd object
+	 *
+	 * @return bool
+	 *
+	 * @since 1.0.0
+	 */
 	public static function is_license_key_valid( $license_key, Edd $edd ) {
+		if( empty($license_key) ){
+			return false;
+		}
+
 		$store_url  = $edd->store_url;
 		$item_name  = $edd->item_name;
 		$license    = $license_key;

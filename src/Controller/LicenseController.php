@@ -23,7 +23,16 @@ class LicenseController {
 	 *
 	 * @since 1.0.0
 	 */
-	protected $license_key;
+	public $license_key;
+
+	/**
+	 * Stores the validation result of the license key
+	 *
+	 * @var boolean
+	 *
+	 * @since 1.0.2
+	 */
+	public $validated;
 
 	/**
 	 * LicenseController constructor.
@@ -45,6 +54,9 @@ class LicenseController {
 	public function index() {
 		if ( isset( $_POST[ $this->edd->license_option ] ) ) {
 			$this->save( $_POST[ $this->edd->license_option ] );
+		} else {
+			$this->license_key = $this->edd->get_license_key();
+			$this->validated = LicenseCheck::is_license_key_valid( $this->license_key, $this->edd );
 		}
 
 		include_once GDPR_UPDATER_DIR . 'View/Admin/LicenseKeyForm.php';
@@ -62,9 +74,11 @@ class LicenseController {
 		if ( LicenseCheck::is_license_key_valid( $license_key, $this->edd ) ) {
 			$this->edd->update_option( $license_key );
 			$this->license_key = $license_key;
+			$this->validated = true;
 		} else {
 			$this->edd->delete_option();
 			$this->license_key = null;
+			$this->validated = false;
 		}
 	}
 }
