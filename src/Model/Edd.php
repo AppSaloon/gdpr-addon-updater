@@ -67,7 +67,7 @@ class Edd {
 	/**
 	 * Returns option value
 	 *
-	 * @return mixed|void
+	 * @return string
 	 *
 	 * @since 1.0.3
 	 */

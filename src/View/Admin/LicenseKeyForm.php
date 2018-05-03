@@ -9,6 +9,11 @@
  */
 ?>
 <div class="wrap">
+	<?php
+	if ( isset( $_POST[ $this->edd->license_option ] ) && $this->validated == false ):
+		?>
+        <div class="notice error"><?php echo $this->edd->plugin_name . ' '. __('license key is not valid.', 'wp_gdpr'); ?></div>
+	<?php endif; ?>
     <h2><?php echo $this->edd->plugin_name . ' ' . __( 'License', 'wp_gdpr' ); ?></h2>
     <form method="post" action="" class="postbox">
         <label for="<?php echo $this->edd->license_option; ?>"><?php _e( 'Add your license', 'wp_gdpr' ); ?>:</label>
