@@ -64,4 +64,15 @@ class Edd {
 		update_option( $this->license_option, $value );
 	}
 
+	/**
+	 * Returns option value
+	 *
+	 * @return mixed|void
+	 *
+	 * @since 1.0.3
+	 */
+	public function get_license_key() {
+		return get_option( $this->license_option, true );
+	}
+
 }
