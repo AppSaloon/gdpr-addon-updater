@@ -72,7 +72,7 @@ class Edd {
 	 * @since 1.0.3
 	 */
 	public function get_license_key() {
-		return get_option( $this->license_option, true );
+		return get_option( $this->license_option );
 	}
 
 }

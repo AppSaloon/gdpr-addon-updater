@@ -59,7 +59,7 @@ class LicenseController {
 			$this->validated = LicenseCheck::is_license_key_valid( $this->license_key, $this->edd );
 		}
 
-		include_once GDPR_UPDATER_DIR . 'View/Admin/LicenseKeyForm.php';
+		include GDPR_UPDATER_DIR . 'View/Admin/LicenseKeyForm.php';
 	}
 
 	/**
