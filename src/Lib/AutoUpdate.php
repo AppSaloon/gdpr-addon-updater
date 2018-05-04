@@ -49,30 +49,9 @@ class AutoUpdate {
 	 * @since 1.0.0
 	 */
 	public function handle_updates() {
-		if ( $this->git_repository_is_live() && $this->licensekey_is_valid() ) {
+		if ( $this->licensekey_is_valid() ) {
 			new BitbucketPluginUpdater( $this->bitbucket );
 		}
-	}
-
-	/**
-	 * Checks if the bitbucket repo is live
-	 *
-	 * @return bool returns true if it is live
-	 *              returns false if it is down
-	 *
-	 * @since 1.0.0
-	 */
-	public function git_repository_is_live() {
-		$headers = array( 'Authorization' => 'Basic ' . base64_encode( $this->bitbucket->bb_owner . ":" . $this->bitbucket->bb_password ) );
-		$new_url = $this->bitbucket->bb_host . "/2.0/repositories/" . $this->bitbucket->bb_project_name . "/" . $this->bitbucket->bb_repo_name;
-
-		$request = wp_remote_get( $new_url, array( 'headers' => $headers ) );
-
-		if ( ! is_wp_error( $request ) && $request['response']['code'] == 200 ) {
-			return true;
-		}
-
-		return false;
 	}
 
 	/**
