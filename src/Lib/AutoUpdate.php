@@ -39,9 +39,16 @@ class AutoUpdate {
 		$this->bitbucket = $bitbucket;
 		$this->edd = $edd;
 
-		add_action( 'admin_init', function(){
-			new BitbucketPluginUpdater( $this->bitbucket, $this->edd );
-		} );
+		add_action( 'admin_init', array( $this, 'check_update') );
+	}
+
+	/**
+	 * Start bitbucket plugin version check
+	 *
+	 * @since 1.2.1
+	 */
+	public function check_update() {
+		new BitbucketPluginUpdater( $this->bitbucket, $this->edd );
 	}
 
 }
