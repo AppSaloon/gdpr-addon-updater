@@ -2,8 +2,7 @@
 
 namespace BitbucketUpdater\Lib;
 
-use BitbucketUpdater\Lib\Update\Classes\Bb\BitbucketPluginUpdater;
-use BitbucketUpdater\Model\Bitbucket;
+use BitbucketUpdater\Lib\Update\Classes\Edd\EddPluginUpdater;
 use BitbucketUpdater\Model\Edd;
 
 /**
@@ -12,13 +11,6 @@ use BitbucketUpdater\Model\Edd;
  * @since 1.0.0
  */
 class AutoUpdate {
-
-	/**
-	 * @var \BitbucketUpdater\Model\Bitbucket
-	 *
-	 * @since 1.0.0
-	 */
-	protected $bitbucket;
 
 	/**
 	 * @var \BitbucketUpdater\Model\Edd
@@ -33,22 +25,32 @@ class AutoUpdate {
 	 * @param \BitbucketUpdater\Model\Bitbucket $bitbucket
 	 * @param \BitbucketUpdater\Model\Edd $edd
 	 *
+	 * @version 1.0.2
 	 * @since 1.0.0
 	 */
-	public function __construct( Bitbucket $bitbucket, Edd $edd ) {
-		$this->bitbucket = $bitbucket;
+	public function __construct( Edd $edd ) {
 		$this->edd = $edd;
 
-		add_action( 'admin_init', array( $this, 'check_update') );
+		add_action( 'admin_init', array( $this, 'handle_update' ) );
 	}
 
 	/**
-	 * Start bitbucket plugin version check
+	 * Start EDD plugin version check
 	 *
-	 * @since 1.2.1
+	 * @since 1.0.0
 	 */
-	public function check_update() {
-		new BitbucketPluginUpdater( $this->bitbucket, $this->edd );
-	}
+	public function handle_update() {
+		$license_key = get_option( $this->edd->license_option, false );
 
+		if( $license_key ) {
+			$api_data = array(
+				'version' => $this->edd->plugin_version,
+				'license' => $license_key,
+				'item_name' => $this->edd->item_name,
+				'item_id' => $this->edd->item_id
+			);
+
+			new EddPluginUpdater($this->edd->store_url, $this->edd->plugin_file, $api_data);
+		}
+	}
 }
