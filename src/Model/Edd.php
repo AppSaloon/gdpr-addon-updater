@@ -19,6 +19,15 @@ class Edd {
 	public $item_name;
 
 	/**
+	 * Download ID - Post ID
+	 *
+	 * @var integer
+	 *
+	 * @since 1.0.2
+	 */
+	public $item_id;
+
+	/**
 	 * The website where the EDD works
 	 *
 	 * @var string  website url
@@ -43,6 +52,24 @@ class Edd {
 	 * @since 1.0.0
 	 */
 	public $plugin_name;
+
+	/**
+	 * The current plugin version
+	 *
+	 * @var string
+	 *
+	 * @since 1.0.2
+	 */
+	public $plugin_version;
+
+	/**
+	 * __FILE__ of the current plugin
+	 *
+	 * @var string
+	 *
+	 * @since 1.0.2
+	 */
+	public $plugin_file;
 
 	/**
 	 * Delete option in options table

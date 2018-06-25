@@ -26,24 +26,13 @@ class Updater {
 	protected $edd;
 
 	/**
-	 * Sets bitbucket settings
-	 *
-	 * @param Bitbucket $bitbucket
-	 *
-	 * @since 1.0.0
-	 */
-	public function set_bitbucket( Bitbucket $bitbucket ) {
-		$this->bitbucket = $bitbucket;
-	}
-
-	/**
-	 * Sets gdpr settings
+	 * Updater constructor.
 	 *
 	 * @param Edd $edd
 	 *
-	 * @since 1.0.0
+	 * @since 1.0.2
 	 */
-	public function set_edd( Edd $edd ) {
+	public function __construct(Edd $edd) {
 		$this->edd = $edd;
 	}
 
@@ -53,7 +42,7 @@ class Updater {
 	 * @since 1.0.0
 	 */
 	public function validate() {
-		new AutoUpdate( $this->bitbucket, $this->edd );
+		new AutoUpdate( $this->edd );
 	}
 
 	/**
