@@ -30,7 +30,7 @@ class LicenseController {
 	 *
 	 * @var boolean
 	 *
-	 * @since 1.0.2
+	 * @since 2.0.0
 	 */
 	public $validated;
 

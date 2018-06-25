@@ -23,7 +23,7 @@ class Edd {
 	 *
 	 * @var integer
 	 *
-	 * @since 1.0.2
+	 * @since 2.0.0
 	 */
 	public $item_id;
 
@@ -58,7 +58,7 @@ class Edd {
 	 *
 	 * @var string
 	 *
-	 * @since 1.0.2
+	 * @since 2.0.0
 	 */
 	public $plugin_version;
 
@@ -67,7 +67,7 @@ class Edd {
 	 *
 	 * @var string
 	 *
-	 * @since 1.0.2
+	 * @since 2.0.0
 	 */
 	public $plugin_file;
 

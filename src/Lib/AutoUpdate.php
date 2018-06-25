@@ -25,7 +25,7 @@ class AutoUpdate {
 	 * @param \BitbucketUpdater\Model\Bitbucket $bitbucket
 	 * @param \BitbucketUpdater\Model\Edd $edd
 	 *
-	 * @version 1.0.2
+	 * @version 2.0.0
 	 * @since 1.0.0
 	 */
 	public function __construct( Edd $edd ) {

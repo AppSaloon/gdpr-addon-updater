@@ -30,7 +30,7 @@ class Updater {
 	 *
 	 * @param Edd $edd
 	 *
-	 * @since 1.0.2
+	 * @since 2.0.0
 	 */
 	public function __construct(Edd $edd) {
 		$this->edd = $edd;
