@@ -47,7 +47,8 @@ class AutoUpdate {
 				'version' => $this->edd->plugin_version,
 				'license' => $license_key,
 				'item_name' => $this->edd->item_name,
-				'item_id' => $this->edd->item_id
+				'item_id' => $this->edd->item_id,
+				'author' => $this->edd->plugin_author
 			);
 
 			new EddPluginUpdater($this->edd->store_url, $this->edd->plugin_file, $api_data);

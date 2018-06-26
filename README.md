@@ -15,6 +15,7 @@ This repo will be used to update wp-gdpr addon plugins.
            $edd->plugin_name = 'Plugins name';
            $edd->plugin_file = '__FILE__ of the main plugin file';
            $edd->plugin_version = '2.0.1';
+           $edd->plugin_author = 'Appsaloon';
            
 3. Initialize Updater class with edd model
         *      $updater = new Updater( $edd );

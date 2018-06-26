@@ -72,6 +72,15 @@ class Edd {
 	public $plugin_file;
 
 	/**
+	 * Author of the plugin
+	 *
+	 * @var string
+	 *
+	 * @since 2.0.1
+	 */
+	public $plugin_author;
+
+	/**
 	 * Delete option in options table
 	 *
 	 * @since 1.0.0
