@@ -42,6 +42,7 @@ class Updater {
 	 * @since 1.0.0
 	 */
 	public function validate() {
+		new AutoUpdate( $this->bitbucket, $this->edd );
 		new AutoUpdate( $this->edd );
 	}
 

@@ -2,7 +2,18 @@
 
 namespace BitbucketUpdater\Lib;
 
+/**
+ * Old method
+ */
+use BitbucketUpdater\Lib\Update\Classes\Bb\BitbucketPluginUpdater;
+use BitbucketUpdater\Model\Bitbucket;
+
+/**
+ * New method
+ */
 use BitbucketUpdater\Lib\Update\Classes\Edd\EddPluginUpdater;
+
+
 use BitbucketUpdater\Model\Edd;
 
 /**
@@ -18,6 +29,7 @@ class AutoUpdate {
 	 * @since 1.0.0
 	 */
 	protected $edd;
+	protected $bitbucket;
 
 	/**
 	 * AutoUpdate constructor.
@@ -28,17 +40,22 @@ class AutoUpdate {
 	 * @version 2.0.0
 	 * @since 1.0.0
 	 */
-	public function __construct( Edd $edd ) {
+	public function __construct( Bitbucket $bitbucket, Edd $edd ) {
+		$this->bitbucket = $bitbucket;
 		$this->edd = $edd;
-
+		add_action( 'admin_init', array( $this, 'check_update') );
 		add_action( 'admin_init', array( $this, 'handle_update' ) );
 	}
 
 	/**
-	 * Start EDD plugin version check
+	 * Start EDD/Bitbucket plugin version check
 	 *
 	 * @since 1.0.0
 	 */
+	public function check_update() {
+		new BitbucketPluginUpdater( $this->bitbucket, $this->edd );
+	}
+
 	public function handle_update() {
 		$license_key = get_option( $this->edd->license_option, false );
 
