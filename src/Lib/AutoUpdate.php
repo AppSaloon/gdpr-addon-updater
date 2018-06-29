@@ -1,24 +1,19 @@
 <?php
-
 namespace BitbucketUpdater\Lib;
-
 use BitbucketUpdater\Lib\Update\Classes\Edd\EddPluginUpdater;
 use BitbucketUpdater\Model\Edd;
-
 /**
  * Auto updates the plugin if parameters are valid
  *
  * @since 1.0.0
  */
 class AutoUpdate {
-
 	/**
 	 * @var \BitbucketUpdater\Model\Edd
 	 *
 	 * @since 1.0.0
 	 */
 	protected $edd;
-
 	/**
 	 * AutoUpdate constructor.
 	 *
@@ -30,10 +25,8 @@ class AutoUpdate {
 	 */
 	public function __construct( Edd $edd ) {
 		$this->edd = $edd;
-
 		add_action( 'admin_init', array( $this, 'handle_update' ) );
 	}
-
 	/**
 	 * Start EDD plugin version check
 	 *
@@ -41,7 +34,6 @@ class AutoUpdate {
 	 */
 	public function handle_update() {
 		$license_key = get_option( $this->edd->license_option, false );
-
 		if( $license_key ) {
 			$api_data = array(
 				'version' => $this->edd->plugin_version,
@@ -50,7 +42,6 @@ class AutoUpdate {
 				'item_id' => $this->edd->item_id,
 				'author' => $this->edd->plugin_author
 			);
-
 			new EddPluginUpdater($this->edd->store_url, $this->edd->plugin_file, $api_data);
 		}
 	}
