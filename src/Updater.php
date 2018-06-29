@@ -3,6 +3,7 @@
 namespace BitbucketUpdater;
 
 use BitbucketUpdater\Lib\AutoUpdate;
+use BitbucketUpdater\Lib\AutoUpdateLegacy;
 use BitbucketUpdater\Model\Bitbucket;
 use BitbucketUpdater\Model\Edd;
 use BitbucketUpdater\Controller\LicenseController;
@@ -24,6 +25,7 @@ class Updater {
 	 * @since 1.0.0
 	 */
 	protected $edd;
+	protected $version = 1;
 
 	/**
 	 * Updater constructor.
@@ -32,7 +34,31 @@ class Updater {
 	 *
 	 * @since 2.0.0
 	 */
-	public function __construct(Edd $edd) {
+	public function __construct( $edd = '') {
+		if ( ! empty( $edd ) ){
+			$this->edd = $edd;
+			$this->version = 2;
+		}
+	}
+
+	/**
+	 * Sets bitbucket settings
+	 *
+	 * @param Bitbucket $bitbucket
+	 *
+	 * @since 1.0.0
+	 */
+	public function set_bitbucket( Bitbucket $bitbucket ) {
+		$this->bitbucket = $bitbucket;
+	}
+	/**
+	 * Sets gdpr settings
+	 *
+	 * @param Edd $edd
+	 *
+	 * @since 1.0.0
+	 */
+	public function set_edd( Edd $edd ) {
 		$this->edd = $edd;
 	}
 
@@ -42,8 +68,11 @@ class Updater {
 	 * @since 1.0.0
 	 */
 	public function validate() {
-		new AutoUpdate( $this->bitbucket, $this->edd );
-		new AutoUpdate( $this->edd );
+		if ($this->version == 1){
+			new AutoUpdateLegacy( $this->bitbucket, $this->edd );
+		} else {
+			new AutoUpdate( $this->edd );
+		}
 	}
 
 	/**
