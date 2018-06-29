@@ -22,6 +22,17 @@ This repo will be used to update wp-gdpr addon plugins.
 4. Push Bitbucket model to the Updater class
    *      $updater->set_bitbucket( $bitbucket );
 5. Set Edd Model
+    *      $edd = new Edd();
+           $edd->item_name = 'Edd download name';
+           $edd->store_url = 'https://wp-gdpr.eu/'; (optional: default = https://wp-gdpr.eu/)
+           $edd->license_option = 'Option key for the plugin to save the value in options database table';
+           $edd->plugin_name = 'Plugins name';
+6. Push Edd model to the Updater class
+    *      $updater->set_edd( $edd );
+7. Output License key form
+    *      $updater->display_license_form();
+8. Validate all and check for version update
+    *      $updater->validate();
 
 
 # New Method
@@ -41,7 +52,7 @@ This repo will be used to update wp-gdpr addon plugins.
            $edd->plugin_author = 'Appsaloon';
            
 3. Initialize Updater class with edd model
-        *      $updater = new Updater( $edd );
+    *      $updater = new Updater( $edd );
                    
 4. Output License key form
     *      $updater->display_license_form();
