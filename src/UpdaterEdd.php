@@ -3,21 +3,12 @@
 namespace BitbucketUpdater;
 
 use BitbucketUpdater\Lib\AutoUpdate;
-use BitbucketUpdater\Lib\AutoUpdateLegacy;
-use BitbucketUpdater\Model\Bitbucket;
 use BitbucketUpdater\Model\Edd;
 use BitbucketUpdater\Controller\LicenseController;
 
 define('GDPR_UPDATER_DIR', trailingslashit( dirname( __FILE__ ) ));
 
-class Updater {
-
-	/**
-	 * @var \BitbucketUpdater\Model\Bitbucket
-	 *
-	 * @since 1.0.0
-	 */
-	protected $bitbucket;
+class UpdaterEdd {
 
 	/**
 	 * @var \BitbucketUpdater\Model\Edd
@@ -27,23 +18,13 @@ class Updater {
 	protected $edd;
 
 	/**
-	 * Sets bitbucket settings
-	 *
-	 * @param Bitbucket $bitbucket
-	 *
-	 * @since 1.0.0
-	 */
-	public function set_bitbucket( Bitbucket $bitbucket ) {
-		$this->bitbucket = $bitbucket;
-	}
-	/**
-	 * Sets gdpr settings
+	 * Updater constructor.
 	 *
 	 * @param Edd $edd
 	 *
-	 * @since 1.0.0
+	 * @since 2.0.0
 	 */
-	public function set_edd( Edd $edd ) {
+	public function __construct( Edd $edd ) {
 		$this->edd = $edd;
 	}
 
@@ -53,7 +34,7 @@ class Updater {
 	 * @since 1.0.0
 	 */
 	public function validate() {
-		new AutoUpdateLegacy( $this->bitbucket, $this->edd );
+		new AutoUpdate( $this->edd );
 	}
 
 	/**

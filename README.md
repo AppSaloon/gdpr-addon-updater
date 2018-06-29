@@ -51,8 +51,8 @@ This repo will be used to update wp-gdpr addon plugins.
            $edd->plugin_version = '2.0.1';
            $edd->plugin_author = 'Appsaloon';
            
-3. Initialize Updater class with edd model
-    *      $updater = new Updater( $edd );
+3. Initialize UpdaterEdd class with edd model
+    *      $updater = new UpdaterEdd( $edd );
                    
 4. Output License key form
     *      $updater->display_license_form();
