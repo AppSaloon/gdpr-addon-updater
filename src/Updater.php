@@ -7,6 +7,7 @@ use BitbucketUpdater\Lib\AutoUpdateLegacy;
 use BitbucketUpdater\Model\Bitbucket;
 use BitbucketUpdater\Model\Edd;
 use BitbucketUpdater\Controller\LicenseController;
+
 if ( ! defined ('GDPR_UPDATER_DIR' ) ) {
 	define( 'GDPR_UPDATER_DIR', trailingslashit( dirname( __FILE__ ) ) );
 }
