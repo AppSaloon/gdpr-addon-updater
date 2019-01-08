@@ -30,6 +30,9 @@ class EddPluginUpdater {
 	 * @param string  $_api_url     The URL pointing to the custom API endpoint.
 	 * @param string  $_plugin_file Path to the plugin file.
 	 * @param array   $_api_data    Optional data to send with API calls.
+	 *
+	 * @since 1.0.0
+	 * @version 2.2.0
 	 */
 	public function __construct( $_api_url, $_plugin_file, $_api_data = null ) {
 
@@ -86,7 +89,7 @@ class EddPluginUpdater {
 		global $pagenow;
 
 		if ( ! is_object( $_transient_data ) ) {
-			$_transient_data = new stdClass;
+			$_transient_data = new \stdClass;
 		}
 
 		if ( 'plugins.php' == $pagenow && is_multisite() ) {
@@ -151,7 +154,7 @@ class EddPluginUpdater {
 
 		$update_cache = get_site_transient( 'update_plugins' );
 
-		$update_cache = is_object( $update_cache ) ? $update_cache : new stdClass();
+		$update_cache = is_object( $update_cache ) ? $update_cache : new \stdClass();
 
 		if ( empty( $update_cache->response ) || empty( $update_cache->response[ $this->name ] ) ) {
 
