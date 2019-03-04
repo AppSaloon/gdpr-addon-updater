@@ -4,50 +4,114 @@ namespace BitbucketUpdater\Lib;
 
 use BitbucketUpdater\Model\Edd;
 
-class LicenseCheck {
+class LicenseCheck
+{
 
-	/**
-	 * Validate given key
-	 *
-	 * @param $license_key  string  License key
-	 * @param \BitbucketUpdater\Model\Edd $edd object  Edd object
-	 *
-	 * @return bool
-	 *
-	 * @since 1.0.0
-	 * @version 2.2.0
-	 */
-	public static function is_license_key_valid( $license_key, Edd $edd ) {
-		if ( empty( $license_key ) ) {
-			return false;
-		}
+    /**
+     * Validate given key
+     *
+     * @param $license_key  string  License key
+     * @param \BitbucketUpdater\Model\Edd $edd object  Edd object
+     *
+     * @return bool|object
+     *
+     * @since 1.0.0
+     * @version 2.2.0
+     */
+    public static function is_license_key_valid($license_key, Edd $edd)
+    {
+        if (empty($license_key)) {
+            return false;
+        }
 
-		$store_url  = $edd->store_url;
-		$item_name  = $edd->item_name;
-		$item_id    = $edd->item_id;
-		$license    = $license_key;
-		$api_params = array(
-			'edd_action' => 'check_license',
-			'license'    => $license,
-			'item_id'    => $item_id,
-			'item_name'  => urlencode( $item_name ),
-			'url'        => home_url()
-		);
-		$response   = wp_remote_post( $store_url, array(
-			'body'      => $api_params,
-			'timeout'   => 15,
-			'sslverify' => false
-		) );
-		if ( is_wp_error( $response ) ) {
-			return false;
-		}
+        $store_url = $edd->store_url;
+        $item_name = $edd->item_name;
+        $item_id   = $edd->item_id;
+        $license   = $license_key;
 
-		$license_data = json_decode( wp_remote_retrieve_body( $response ) );
+        $api_params = array(
+            'edd_action' => 'check_license',
+            'license'    => $license,
+            'item_id'    => $item_id,
+            'item_name'  => urlencode($item_name),
+            'url'        => home_url(),
+        );
 
-		if ( $license_data->license == 'valid' ) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+        $response = wp_remote_post(
+            $store_url,
+            array(
+                'body'      => $api_params,
+                'timeout'   => 15,
+                'sslverify' => false,
+            )
+        );
+
+        if (is_wp_error($response)) {
+            return false;
+        }
+
+        $license_data = json_decode(wp_remote_retrieve_body($response));
+
+        if ($license_data->license == 'site_inactive' || $license_data->license == 'inactive') {
+            $license_data = static::activate_license($license_key, $edd);
+        }
+
+        if ($license_data->license == 'valid') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Activates the license
+     *
+     * @param $license_key  string  License key
+     * @param \BitbucketUpdater\Model\Edd $edd object  Edd object
+     *
+     * @return bool|object
+     *
+     * @since 1.0.0
+     * @version 2.2.0
+     */
+    public static function activate_license($license_key, Edd $edd)
+    {
+        if (empty($license_key)) {
+            return false;
+        }
+
+        $store_url = $edd->store_url;
+        $item_name = $edd->item_name;
+        $item_id   = $edd->item_id;
+        $license   = $license_key;
+
+        $api_params = array(
+            'edd_action' => 'activate_license',
+            'license'    => $license,
+            'item_id'    => $item_id,
+            'item_name'  => urlencode($item_name),
+            'url'        => home_url(),
+        );
+
+        $response = wp_remote_post(
+            $store_url,
+            array(
+                'body'      => $api_params,
+                'timeout'   => 15,
+                'sslverify' => false,
+            )
+        );
+
+        if (is_wp_error($response)) {
+            return false;
+        }
+
+        $license_data = json_decode(wp_remote_retrieve_body($response));
+
+        if ($license_data->license == 'valid') {
+            return $license_data;
+        } else {
+            return false;
+        }
+    }
 }
